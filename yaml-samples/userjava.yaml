@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: userjava
+  namespace: api-dev
 spec:
   replicas: 2
   selector:
@@ -18,14 +19,12 @@ spec:
         env:
         - name: PORT
           value: "80"
-        - name: WEB_PORT
-          value: "80"
         - name: SQL_USER
           value: "<not-set>"
         - name: SQL_PASSWORD
           value: "<not-set>"
         - name: SQL_SERVER
-          value: "<not-set>.database.windows.net"
+          value: "<not-set>"
         - name: SQL_DBNAME
           value: "<not-set>"
         ports:

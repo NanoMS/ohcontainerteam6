@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tripviewer
+  namespace: web-dev
 spec:
   replicas: 2
   selector:
@@ -17,11 +18,13 @@ spec:
         image: registryatk4536.azurecr.io/tripinsights/tripviewer:1.0
         env:
         - name: TRIPS_API_ENDPOINT
-          value: "http://trips-svc.default.svc.cluster.local"
+          value: "http://trips-svc.api-dev.svc.cluster.local"
         - name: USERPROFILE_API_ENDPOINT
-          value: "http://userprofile-svc.default.svc.cluster.local"
+          value: "http://userprofile-svc.api-dev.svc.cluster.local"
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
         ports:
-        - containerPort: 8085
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
@@ -31,7 +34,7 @@ spec:
   type: LoadBalancer
   ports:
   - port: 80
-    targetPort: 8085
+    targetPort: 80
     protocol: TCP
     name: http
   selector:
