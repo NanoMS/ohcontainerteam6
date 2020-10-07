@@ -23,11 +23,12 @@ az role assignment create --role Reader --assignee $SP_ID --scope /subscriptions
 
 echo Set policy :
 az keyvault set-policy -n $kvname --secret-permissions get --spn $SP_ID
+az keyvault set-policy -n $kvname --key-permissions get --spn $SP_ID
 
 echo create secret kubectl
 echo kubectl create secret generic secrets-store-creds --from-literal clientid=$SP_ID --from-literal clientsecret=$SP_SECRET
 kubectl delete secret secrets-store-creds 
-kubectl create secret generic secrets-store-creds --from-literal clientid=$SP_ID --from-literal clientsecret=$SP_SECRET
+kubectl create secret generic secrets-store-creds --from-literal clientid=$SP_ID --from-literal clientsecret=$SP_SECRET --namespace=api-dev
 
 echo Updating credentials :
 az aks update-credentials --resource-group $rg --name $aksname --reset-service-principal --service-principal $SP_ID --client-secret $SP_SECRET

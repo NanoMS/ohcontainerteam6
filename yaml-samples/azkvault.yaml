@@ -2,21 +2,54 @@
 apiVersion: secrets-store.csi.x-k8s.io/v1alpha1
 kind: SecretProviderClass
 metadata:
-  name: kv-ohteam6
+  name: azure-kvstore
+  namespace: api-dev
 spec:
   provider: azure
+  secretObjects:
+  - secretName: sqlpassword
+    type: Opaque
+    data:
+    - objectName: sqlpassword
+      key: mysecret
+  - secretName: sqldb
+    type: Opaque
+    data:
+    - objectName: sqldb
+      key: mysecret
+  - secretName: sqluser
+    type: Opaque
+    data:
+    - objectName: sqluser
+      key: mysecret
+  - secretName: sqlserver
+    type: Opaque
+    data:
+    - objectName: sqlserver
+      key: mysecret
   parameters:
     usePodIdentity: "false"         # [OPTIONAL] if not provided, will default to "false"
     keyvaultName: "kv-ohteam6"          # the name of the KeyVault
+    userAssignedIdentityID: "d53d645c-f641-4012-9b3b-939c1928038f"
     cloudName: ""          # [OPTIONAL for Azure] if not provided, azure environment will default to AzurePublicCloud 
     objects:  |
       array:
         - |
-          objectName: sql_passwd
+          objectName: sqlpassword
           objectType: secret        # object types: secret, key or cert
           objectVersion: ""         # [OPTIONAL] object versions, default to latest if empty
         - |
-          objectName: key1
-          objectType: key
+          objectName: sqldb
+          objectType: secret
           objectVersion: ""
-    tenantId: "tid"                    # the tenant ID of the KeyVault  
+        - |
+          objectName: sqluser
+          objectType: secret
+          objectVersion: ""
+        - |
+          objectName: sqlserver
+          objectType: secret
+          objectVersion: ""
+    resourceGroup: "teamResources"
+    subscriptionId: "949447fd-874d-4802-8a3e-129cab71c209"
+    tenantId: "e977721b-cfeb-4c96-8397-659898f6bb60"                    # the tenant ID of the KeyVault  

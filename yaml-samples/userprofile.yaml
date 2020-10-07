@@ -22,15 +22,25 @@ spec:
         - name: WEB_PORT
           value: "80"
         - name: SQL_USER
-          value: "<not-set>"
+          valueFrom:
+            secretKeyRef:
+              key: mysecret
+              name: sqluser
         - name: SQL_PASSWORD
-          value: "<not-set>"
+          valueFrom:
+            secretKeyRef:
+              key: mysecret
+              name: sqlpassword
         - name: SQL_SERVER
-          value: "<not-set>"
+          valueFrom:
+            secretKeyRef:
+              key: mysecret
+              name: sqlserver
         - name: SQL_DBNAME
-          value: "<not-set>"
-        - name: ASPNETCORE_ENVIRONMENT
-          value: "Development"
+          valueFrom:
+            secretKeyRef:
+              key: mysecret
+              name: sqldb
         ports:
         - containerPort: 80
 ---
