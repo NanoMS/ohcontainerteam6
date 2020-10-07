@@ -1,8 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  label:
-    app: userjava
   name: userjava
 spec:
   replicas: 2
@@ -14,16 +12,14 @@ spec:
       labels:
         app: userjava
     spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
       containers:
       - name: userjava
         image: registryatk4536.azurecr.io/tripinsights/userjava:1.0
         env:
         - name: PORT
-          value: "8083"
+          value: "80"
         - name: WEB_PORT
-          value: "8083"
+          value: "80"
         - name: SQL_USER
           value: "<not-set>"
         - name: SQL_PASSWORD
@@ -33,18 +29,16 @@ spec:
         - name: SQL_DBNAME
           value: "<not-set>"
         ports:
-        - containerPort: 8083
+        - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: userjava
-  labels:
-    app: userjava
+  name: userjava-svc
 spec:
   ports:
   - port: 80
-    targetPort: 8083
+    targetPort: 80
     protocol: TCP
     name: http
   selector:

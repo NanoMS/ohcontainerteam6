@@ -1,8 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  label:
-    app: userprofile
   name: userprofile
 spec:
   replicas: 2
@@ -14,8 +12,6 @@ spec:
       labels:
         app: userprofile
     spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
       containers:
       - name: userprofile
         image: registryatk4536.azurecr.io/tripinsights/userprofile:1.0
@@ -38,9 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: userprofile
-  labels:
-    app: userprofile
+  name: userprofile-svc
 spec:
   ports:
   - port: 80

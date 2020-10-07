@@ -1,8 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  label:
-    app: trips
   name: trips
 spec:
   replicas: 2
@@ -14,8 +12,6 @@ spec:
       labels:
         app: trips
     spec:
-      nodeSelector:
-        "beta.kubernetes.io/os": linux
       containers:
       - name: trips
         image: registryatk4536.azurecr.io/tripinsights/trips:1.0
@@ -38,9 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: trips
-  labels:
-    app: trips
+  name: trips-svc
 spec:
   ports:
   - port: 80
