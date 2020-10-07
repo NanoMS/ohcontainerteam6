@@ -4,7 +4,6 @@ rg=cedaksrg
 location=northeurope
 aksname=cedaks
 acrname=registryatk4536
-yamlconf=config.$$.
 
 echo Create rg $rg in $location
 if [[ $(az group list -o table | egrep "^${rg}" | awk '{print $1}') != $rg ]]

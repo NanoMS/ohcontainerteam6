@@ -4,7 +4,6 @@ rg=cedaksrg
 location=northeurope
 aksname=cedaks
 acrname=registryatk4536
-yamlconf=config.$$.
 
 echo Check if kubctl is installed ?
 if [[ $(which kubectl) != "/usr/bin/kubectl" ]]
