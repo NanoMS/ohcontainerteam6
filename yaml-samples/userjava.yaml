@@ -24,13 +24,13 @@ spec:
         - name: WEB_PORT
           value: "8083"
         - name: SQL_USER
-          value: "sqladminaTk4536"
+          value: "<not-set>"
         - name: SQL_PASSWORD
-          value: "kF6ng8Ba1"
+          value: "<not-set>"
         - name: SQL_SERVER
-          value: "sqlserveratk4536.database.windows.net"
+          value: "<not-set>.database.windows.net"
         - name: SQL_DBNAME
-          value: "mydrivingDB"
+          value: "<not-set>"
         ports:
         - containerPort: 8083
 ---

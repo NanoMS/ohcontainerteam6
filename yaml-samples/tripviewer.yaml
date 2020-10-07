@@ -20,9 +20,9 @@ spec:
         image: registryatk4536.azurecr.io/tripinsights/tripviewer:1.0
         env:
         - name: TRIPS_API_ENDPOINT
-          value: "http://10.0.82.240"
+          value: "<not-set>"
         - name: USERPROFILE_API_ENDPOINT
-          value: "http://10.0.192.85"
+          value: "<not-set>"
         ports:
         - containerPort: 8085
 ---
