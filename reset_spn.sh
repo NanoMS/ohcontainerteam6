@@ -25,6 +25,8 @@ echo Set policy :
 az keyvault set-policy -n $kvname --secret-permissions get --spn $SP_ID
 
 echo create secret kubectl
+echo kubectl create secret generic secrets-store-creds --from-literal clientid=$SP_ID --from-literal clientsecret=$SP_SECRET
+kubectl delete secret secrets-store-creds 
 kubectl create secret generic secrets-store-creds --from-literal clientid=$SP_ID --from-literal clientsecret=$SP_SECRET
 
 echo Updating credentials :
