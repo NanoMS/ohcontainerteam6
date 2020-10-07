@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tripviewer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tripviewer
+  template:
+    metadata:
+      labels:
+        app: tripviewer
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: tripviewer
+        image: registryatk4536.azurecr.io/tripinsights/tripviewer:1.0
+        env:
+        - name: TRIPS_API_ENDPOINT
+          value: "http://10.0.82.240"
+        - name: USERPROFILE_API_ENDPOINT
+          value: "http://10.0.192.85"
+        ports:
+        - containerPort: 8085
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tripviewer
+  labels:
+    app: tripviewer
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8085
+    protocol: TCP
+    name: http
+  selector:
+    app: tripviewer

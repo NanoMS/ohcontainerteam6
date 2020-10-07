@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userjava
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: userjava
+  template:
+    metadata:
+      labels:
+        app: userjava
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: userjava
+        image: registryatk4536.azurecr.io/tripinsights/userjava:1.0
+        env:
+        - name: PORT
+          value: "8083"
+        - name: WEB_PORT
+          value: "8083"
+        - name: SQL_USER
+          value: "sqladminaTk4536"
+        - name: SQL_PASSWORD
+          value: "kF6ng8Ba1"
+        - name: SQL_SERVER
+          value: "sqlserveratk4536.database.windows.net"
+        - name: SQL_DBNAME
+          value: "mydrivingDB"
+        ports:
+        - containerPort: 8083
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userjava
+  labels:
+    app: userjava
+spec:
+  ports:
+  - port: 80
+    targetPort: 8083
+    protocol: TCP
+    name: http
+  selector:
+    app: userjava

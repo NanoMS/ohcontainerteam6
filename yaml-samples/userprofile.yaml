@@ -1,0 +1,50 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userprofile
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: userprofile
+  template:
+    metadata:
+      labels:
+        app: userprofile
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: userprofile
+        image: registryatk4536.azurecr.io/tripinsights/userprofile:1.0
+        env:
+        - name: PORT
+          value: "8084"
+        - name: WEB_PORT
+          value: "8084"
+        - name: SQL_USER
+          value: "sqladminaTk4536"
+        - name: SQL_PASSWORD
+          value: "kF6ng8Ba1"
+        - name: SQL_SERVER
+          value: "sqlserveratk4536.database.windows.net"
+        - name: SQL_DBNAME
+          value: "mydrivingDB"
+        ports:
+        - containerPort: 8084
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userprofile
+  labels:
+    app: userprofile
+spec:
+  ports:
+  - port: 80
+    targetPort: 8084
+    protocol: TCP
+    name: http
+  selector:
+    app: userprofile
