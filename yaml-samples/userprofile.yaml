@@ -47,7 +47,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: userprofile
+  name: userprofile-svc
+  namespace: api-dev
 spec:
   ports:
   - port: 80

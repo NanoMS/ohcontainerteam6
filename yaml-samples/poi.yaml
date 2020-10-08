@@ -48,6 +48,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: poi-svc
+  namespace: api-dev
 spec:
   ports:
   - port: 80
