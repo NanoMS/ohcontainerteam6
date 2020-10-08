@@ -32,6 +32,7 @@ metadata:
   name: tripviewer-svc
   namespace: web-dev
 spec:
+  type: LoadBalancer
   ports:
   - port: 80
     targetPort: 80

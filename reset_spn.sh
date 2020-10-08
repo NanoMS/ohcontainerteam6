@@ -1,7 +1,7 @@
 #!/bin/bash
 
-rg=teamResources
-aksname=team6akscluster
+rg=team6
+aksname=team6aks
 kvname=kv-ohteam6
 subid=949447fd-874d-4802-8a3e-129cab71c209
 

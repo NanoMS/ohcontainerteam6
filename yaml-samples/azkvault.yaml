@@ -30,7 +30,7 @@ spec:
   parameters:
     usePodIdentity: "false"         # [OPTIONAL] if not provided, will default to "false"
     keyvaultName: "kv-ohteam6"          # the name of the KeyVault
-    userAssignedIdentityID: "d53d645c-f641-4012-9b3b-939c1928038f"
+    userAssignedIdentityID: "efb4c7ae-3a4a-4615-a88b-0f08f0a07eb5"
     cloudName: ""          # [OPTIONAL for Azure] if not provided, azure environment will default to AzurePublicCloud 
     objects:  |
       array:
